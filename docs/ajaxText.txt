@@ -1,0 +1,6 @@
+IT WORK ! Ajax function in txt file
+$(document).ready(function(){
+  $("#showAjax").click(function(){
+    $("#ajaxShow").load("docs/ajaxText.txt");
+  });
+});

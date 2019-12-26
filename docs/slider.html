@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        #slider {
+            width: 70%;
+            height: 400px;
+            margin: auto;
+            position: relative;
+            font-family: 'Roboto', Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+
+        #slider .slides-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        #slider .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+
+        #slider .slide .text {
+            width: 100%;
+            height: 100%;
+            background: #8fc6eb;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #slider .slide:first-child {
+            display: block;
+        }
+
+        #slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #slider .pager {
+            font-size: 14px;
+            font-weight: 900;
+            color: #777;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        #slider .arrows a {
+            position: absolute;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.65);
+            top: 43%;
+            left: 15px;
+            font-weight: 400;
+            line-height: 1;
+            font-size: 42px;
+        }
+
+        #slider .arrows a:hover {
+            color: #fff;
+        }
+
+        #slider .arrows a.next {
+            left: initial;
+            right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="slider">
+        <div class="slides-container">
+            <div class="slide"><img src="https://images.pexels.com/photos/302769/pexels-photo-302769.jpeg?cs=srgb&dl=view-of-high-rise-buildings-during-day-time-302769.jpg&fm=jpg" alt="view of high rise buildings during day time" ></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg?cs=srgb&dl=15120-architecture-blue-269077.jpg&fm=jpg" alt="architecture blue" ></div>
+            <div class="slide"><img src="https://images.pexels.com/photos/373965/pexels-photo-373965.jpeg?cs=srgb&dl=architecture-buildings-city-373965.jpg&fm=jpg" alt="architecture buildings city" ></div>
+        </div>
+
+        <div class="arrows">
+            <a class="prev" href="#"><</i></a>
+            <a class="next" href="#">></a>
+        </div>
+
+        <div class="pager">
+            1 / 3
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+    function SimpleSlider(element = '#simple-slider', auto = false, pause) {
+        var $this = $(element);
+        var slidesCont = $this.children('.slides-container');
+        var slides = slidesCont.children('.slide');
+        var pager = $this.children('.pager');
+        var arrowsCont = $this.children('.arrows');
+        var prevSlide = arrowsCont.children('.prev');
+        var nextSlide = arrowsCont.children('.next');
+        var slidesCount = slides.length;
+        var currentSlide = slides.first();
+        var currentSlideIndex = 1;
+        var autoPlay = null;
+        slides.not(':first').css('display', 'none');
+        currentSlide.addClass('active');
+        function fadeNext() {
+            currentSlide.removeClass('active').fadeOut(700);
+
+            if(currentSlideIndex == slidesCount) {
+                currentSlide = slides.first();
+                currentSlide.delay(500).addClass('active').fadeIn(700);
+                currentSlideIndex = 1;
+            } else {
+                currentSlideIndex++;
+                currentSlide = currentSlide.next();
+                currentSlide.delay(500).addClass('active').fadeIn(700);
+            }
+
+            pager.text(currentSlideIndex+' / '+slidesCount);
+        }
+        function fadePrev() {
+            currentSlide.removeClass('active').fadeOut(700);
+
+            if(currentSlideIndex == 1) {
+                currentSlide = slides.last();
+                currentSlide.delay(500).addClass('active').fadeIn();
+                currentSlideIndex = slidesCount;
+            } else {
+                currentSlideIndex--;
+                currentSlide = currentSlide.prev();
+                currentSlide.delay(500).addClass('active').fadeIn(700);
+            }
+
+            pager.text(currentSlideIndex+' / '+slidesCount);
+        }
+        function AutoPlay() {
+            clearInterval(autoPlay);
+
+            if(auto == true)
+                autoPlay = setInterval(function() {fadeNext()}, pause);
+        }
+        $(nextSlide).click(function(e) {
+            e.preventDefault();
+            fadeNext();
+            AutoPlay();
+        });
+        $(prevSlide).click(function(e) {
+            e.preventDefault();
+            fadePrev();
+            AutoPlay();
+        });
+        AutoPlay();
+    }
+
+    $(function() {
+        SimpleSlider('#slider', true, 8000);
+    });
+    </script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,900,900i" rel="stylesheet">
+</body>
+</html>
