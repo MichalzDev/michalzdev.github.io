@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+
+<head>
+  <title>Filtry</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<style>
+  .slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+
+  .slider:hover {
+    opacity: 1;
+  }
+
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+
+  .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <h1 class="text-center">Projekt Canvas</h1><br>
+    <div class="text-center">
+      <input type="file" class="form-control-file" id="upload"><br>
+      <canvas id="canvas"></canvas><br>
+    </div>
+
+
+
+    <section>
+      <div class="row">
+        <div class="text-center col-xl-4">
+          <br><label>Jasność</label><br>
+          <input type="range" class="slider" id="jasnosc" min="-50" max="50" value="0" step="1"><br>
+        </div>
+
+
+        <div class="text-center col-xl-4">
+          <br><label>Kontrast</label><br>
+          <input type="range" class="slider" id="kontrast" min="-50" max="50" value="0" step="1"><br>
+        </div>
+
+        <div class="text-center col-xl-4">
+          <br><label>Custom</label><br>
+          <input type="range" class="slider" id="custom" min="-50" max="50" value="0" step="1"><br>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="text-center col-xl-4">
+          <br><button type="button" id="inwersja" class="btn btn-success">Negatyw</button>
+        </div>
+        <div class="text-center col-xl-4">
+          <br><button type="button" id="reset" class="btn btn-secondary">Reset</button>
+        </div>
+        <div class="text-center col-xl-4">
+
+          <br><a class="btn btn-primary" id="download" download="obrazek.jpg" href="" onclick="download_img(this);">Zapisz</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
